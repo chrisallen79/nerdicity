@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server",
-    "server:dev": "nodemon ./server/src/index.js"
+    "build": "babel src -d lib",
+    "server:dev": "nodemon --ignore ./client/ --exec babel-node -- ./server/src/index.js",
+    "start": "node server"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -25,6 +26,10 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "concurrently": "^5.0.2",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",

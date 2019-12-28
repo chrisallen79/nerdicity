@@ -1,9 +1,6 @@
-const express = require('express');
+import App from './App';
+import CONFIG from '../config/config';
 
-const app = express();
+const app = new App().express;
 
-app.get('/', (req, res) => res.send('API Running'));
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(CONFIG.api_port, () => console.log(`Server started on port ${CONFIG.api_port}`));

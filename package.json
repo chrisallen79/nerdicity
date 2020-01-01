@@ -1,11 +1,11 @@
 {
   "name": "nerdicity",
   "version": "0.1.0",
-  "description": "",
+  "description": "nerdicity.com",
   "main": "index.js",
   "scripts": {
     "build": "babel src -d lib",
-    "server:dev": "nodemon --ignore ./client/ --exec babel-node -- ./server/src/index.js",
+    "server:dev": "nodemon --ignore ./client/ --exec babel-node -- ./server/src/server.js",
     "start": "node server"
   },
   "eslintConfig": {

@@ -9,7 +9,7 @@ import { User } from '../../models/User';
 const router = express.Router();
 
 // @route   POST api/users
-// @desc    Test route
+// @desc    Register User
 // @access  Public
 router.post(
   '/',

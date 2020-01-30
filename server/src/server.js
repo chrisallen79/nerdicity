@@ -10,13 +10,13 @@ import userRoutes from './routes/api/users';
 
 const app = new express();
 
-// set up the database
+// configure database
 configureDatabase();
 
-// set up middleware
+// configure middleware
 app.use(express.json({ extended: false }));
 
-// set up routes
+// configure routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);

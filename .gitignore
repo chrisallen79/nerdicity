@@ -4,9 +4,6 @@
 /node_modules
 .env
 
-# ignore client folder for now
-./client
-
 # misc
 .DS_Store
 .vscode

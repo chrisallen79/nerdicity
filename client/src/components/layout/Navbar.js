@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Menu } from 'semantic-ui-react';
+import { Grid, Menu, Segment } from 'semantic-ui-react';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -17,25 +17,40 @@ export default class Navbar extends Component {
   render() {
     const { activeItem } = this.state;
     return (
-      <Menu>
-        <Menu.Item name="home" active={activeItem === 'home'} onClick={this.handleItemClick} />
-        <Menu.Item
-          name="messages"
-          active={activeItem === 'messages'}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Item
-          name="friends"
-          active={activeItem === 'friends'}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Menu position="right">
-          <Menu.Item>
-            <Input icon="search" placeholder="Search..." />
-          </Menu.Item>
-          <Menu.Item name="Login" active={activeItem === 'logout'} onClick={this.handleItemClick} />
-        </Menu.Menu>
-      </Menu>
+      <Grid>
+        <Grid.Row id="header">
+          <Grid.Column width={12}>
+            <div className="logo">
+              <img src="/assets/cbbc-logo-light.svg" />
+            </div>
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <Segment vertical></Segment>
+            <Segment vertical>
+              <Menu position="right bottom" secondary>
+                <Menu.Item
+                  name="profiles"
+                  as="a"
+                  active={activeItem === 'profiles'}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  name="register"
+                  as="a"
+                  active={activeItem === 'register'}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  name="Login"
+                  as="a"
+                  active={activeItem === 'logout'}
+                  onClick={this.handleItemClick}
+                />
+              </Menu>
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

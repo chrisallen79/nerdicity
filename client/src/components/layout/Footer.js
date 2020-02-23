@@ -3,9 +3,9 @@ import { Container, Segment } from 'semantic-ui-react';
 
 const Footer = () => {
   return (
-    <Segment attached="bottom" textAlign="center" vertical style={{ padding: '5em 0em' }}>
-      <Container attached="bottom">Footer Text</Container>
-    </Segment>
+    <div id="footer">
+      <Container>Copyright &copy; {new Date().getFullYear()} Nerdicity Media</Container>
+    </div>
   );
 };
 

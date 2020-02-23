@@ -1,23 +1,22 @@
 import React from 'react';
-import { Grid, Image, Segment } from 'semantic-ui-react';
+import { Button, Container, Grid, Image, Header, Segment } from 'semantic-ui-react';
 
 const Main = () => {
   return (
-    <Segment>
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={12}>
-            <Image
-              src="https://placehold.it/800x400?text=IMAGE"
-              rounded
-              fluid
-              style={{ paddingLeft: '0.5em' }}
-            />
-          </Grid.Column>
-          <Grid.Column width={4}></Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
+    <section className="bg-halftone">
+      <div className="home-inner">
+        <div className="home-image">
+          <img src="/assets/cbbc-logo-light.svg" />
+        </div>
+        <Container>
+          Join a group and discuss your favorite books, creators, shows, and more!
+        </Container>
+        <div style={{ paddingTop: '30px' }}>
+          <Button secondary>Register</Button>
+          <Button primary>Login</Button>
+        </div>
+      </div>
+    </section>
   );
 };
 

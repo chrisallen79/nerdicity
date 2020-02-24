@@ -3,12 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './client/src/index.js',
+  devtool: 'inline-source-map',
+  entry: ['@babel/polyfill', './client/src/index.js'],
   output: {
     path: path.join(__dirname, '/bundle'),
     filename: 'index_bundle.js'
   },
   devServer: {
+    proxy: {
+      '/api': 'http://localhost:3001'
+    },
+    historyApiFallback: true,
     contentBase: path.join(__dirname, './client/public'),
     port: 3000
   },
@@ -38,7 +43,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './client/public/index.html')
+      template: path.resolve(__dirname, './client/public/index.html'),
+      favicon: path.resolve(__dirname, './client/public/assets/favicon.ico')
     })
   ]
 };

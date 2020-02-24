@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Container, Grid, Image, Header, Segment } from 'semantic-ui-react';
 
 const Main = () => {
@@ -12,8 +13,12 @@ const Main = () => {
           Join a group and discuss your favorite books, creators, shows, and more!
         </Container>
         <div style={{ paddingTop: '30px' }}>
-          <Button secondary>Register</Button>
-          <Button primary>Login</Button>
+          <Button as={Link} to="/register" secondary>
+            Register
+          </Button>
+          <Button as={Link} to="/login" primary>
+            Login
+          </Button>
         </div>
       </div>
     </section>

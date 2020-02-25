@@ -10,7 +10,7 @@ const Main = () => {
           <img src="/assets/cbbc-logo-light.svg" />
         </div>
         <Container>
-          Join a group and discuss your favorite books, creators, shows, and more!
+          Join a group and discuss your favorite books, creators, shows, and more!!!
         </Container>
         <div style={{ paddingTop: '30px' }}>
           <Button as={Link} to="/register" secondary>

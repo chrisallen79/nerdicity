@@ -1,13 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: ['@babel/polyfill', './client/src/index.js'],
+  entry: ['react-hot-loader/patch', '@babel/polyfill', './client/src/index.js'],
   output: {
+    publicPath: '/',
     path: path.join(__dirname, '/bundle'),
-    filename: 'index_bundle.js'
+    filename: '[name].[hash].js'
   },
   devServer: {
     proxy: {
@@ -15,7 +17,14 @@ module.exports = {
     },
     historyApiFallback: true,
     contentBase: path.join(__dirname, './client/public'),
-    port: 3000
+    port: 3000,
+    hot: true,
+    open: true
+  },
+  resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   module: {
     rules: [
@@ -42,7 +51,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
+      inject: true,
       template: path.resolve(__dirname, './client/public/index.html'),
       favicon: path.resolve(__dirname, './client/public/assets/favicon.ico')
     })

@@ -55,7 +55,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, './client/public/index.html'),
-      favicon: path.resolve(__dirname, './client/public/assets/favicon.ico')
+      favicon: path.resolve(__dirname, './client/public/assets/cbbc-icon-blue.ico')
     })
   ]
 };

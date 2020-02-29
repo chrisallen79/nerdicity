@@ -1,15 +1,15 @@
 {
-  "name": "nerdicity",
+  "name": "cbbc",
   "version": "0.1.0",
-  "description": "nerdicity.com",
+  "description": "The Comic Book Book Club",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nerdicity-media/nerdicity.git"
+    "url": "git+https://github.com/nerdicity-media/cbbc.git"
   },
   "scripts": {
     "build": "babel src -d lib",
-    "client:dev": "webpack-dev-server --mode development --open --hot",
+    "client:dev": "NODE_ENV=development webpack-dev-server --mode development",
     "server:dev": "nodemon --ignore ./client/ --exec babel-node -- ./server/src/server.js",
     "start:dev": "concurrently -c \"bgBlue,bgMagenta\" -n \"CLIENT,SERVER\" -p \"[{name} {time}]\" -t \"HH:mm:ss.SSS\" \"npm run client:dev\" \"npm run server:dev\""
   },
@@ -36,13 +36,17 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "semantic-ui-react": "^0.88.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@babel/node": "^7.7.7",
+    "@babel/polyfill": "^7.8.3",
     "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.8.3",
+    "@hot-loader/react-dom": "^16.11.0",
     "concurrently": "^5.0.2",
     "css-loader": "^3.4.2",
     "eslint": "^6.1.0",
@@ -56,6 +60,7 @@
     "html-webpack-plugin": "^3.2.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
+    "react-hot-loader": "^4.12.19",
     "svg-url-loader": "^3.0.3",
     "url-loader": "^3.0.0",
     "webpack": "^4.41.5",

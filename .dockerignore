@@ -1,1 +1,13 @@
+# Built inside of container
 node_modules
+
+# Sensitive information
+.env
+
+# Project configuration
+.prettierrc
+.eslintrc.json
+
+Dockerfile
+
+README.md

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "babel src -d lib",
-    "client:dev": "NODE_ENV=development webpack-dev-server --host 0.0.0.0 --mode development",
+    "client:dev": "NODE_ENV=development webpack-dev-server --host 0.0.0.0 --config ./client/config/webpack.config.js --mode development",
     "server:dev": "nodemon --ignore ./client/ --exec babel-node -- ./server/src/server.js",
     "start:dev": "concurrently -c \"bgBlue,bgMagenta\" -n \"CLIENT,SERVER\" -p \"[{name} {time}]\" -t \"HH:mm:ss.SSS\" \"npm run client:dev\" \"npm run server:dev\""
   },

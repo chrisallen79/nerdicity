@@ -16,7 +16,7 @@ module.exports = {
       '/api': 'http://localhost:3001'
     },
     historyApiFallback: true,
-    contentBase: path.join(__dirname, './client/public'),
+    contentBase: path.join(__dirname, '../public'),
     port: 3000,
     hot: true,
     open: true
@@ -54,8 +54,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
-      template: path.resolve(__dirname, './client/public/index.html'),
-      favicon: path.resolve(__dirname, './client/public/assets/cbbc-icon-blue.ico')
+      template: path.resolve(__dirname, '../public/index.html'),
+      favicon: path.resolve(__dirname, '../public/assets/cbbc-icon-blue.ico')
     })
   ]
 };

@@ -1,25 +1,14 @@
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'inline-source-map',
   entry: ['react-hot-loader/patch', '@babel/polyfill', './client/src/index.js'],
   output: {
     publicPath: '/',
-    path: path.join(__dirname, '/bundle'),
+    path: path.join(__dirname, '../../dist'),
     filename: '[name].[hash].js'
-  },
-  devServer: {
-    proxy: {
-      '/api': 'http://localhost:3001'
-    },
-    historyApiFallback: true,
-    contentBase: path.join(__dirname, '../public'),
-    port: 3000,
-    hot: true,
-    open: true
   },
   resolve: {
     alias: {
@@ -37,10 +26,6 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
-      },
-      {
         test: /\.svg$/,
         loader: 'svg-url-loader'
       },
@@ -51,7 +36,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, '../public/index.html'),

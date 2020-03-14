@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Grid, Image, Header, Segment } from 'semantic-ui-react';
+import cbbcLogo from '../../images/cbbc-logo-light.svg';
 
 const Main = () => {
   return (
     <div>
       <div className="home-image">
-        <img src="/assets/cbbc-logo-light.svg" />
+        <img src={cbbcLogo} />
       </div>
       <Container>
         Join a group and discuss your favorite books, creators, shows, and more!!!

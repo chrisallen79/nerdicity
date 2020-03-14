@@ -27,7 +27,7 @@
   margin: auto;
   overflow: hidden;
   position: relative;
-  background: url('/assets/halftone.png');
+  background-image: url('../images/halftone.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100vh;

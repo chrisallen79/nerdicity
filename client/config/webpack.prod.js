@@ -13,7 +13,10 @@ module.exports = merge(common, {
         sourceMap: true
       }),
       new OptimizeCssAssetsPlugin({})
-    ]
+    ],
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   module: {
     rules: [
@@ -25,8 +28,8 @@ module.exports = merge(common, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[hash].css',
-      chunkFilename: 'static/css/[id].[hash].css'
+      filename: 'static/css/[name].[hash:8].css',
+      chunkFilename: 'static/css/[id].[hash:8].css'
     })
   ]
 });

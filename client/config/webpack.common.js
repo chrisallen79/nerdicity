@@ -7,8 +7,8 @@ module.exports = {
   entry: ['react-hot-loader/patch', '@babel/polyfill', path.join(__dirname, '../src/index.js')],
   output: {
     publicPath: '/',
-    path: path.join(__dirname, '../../dist'),
-    filename: '[name].[hash].js'
+    path: path.join(__dirname, '../../dist/client'),
+    filename: 'static/js/[name].[hash:8].js'
   },
   resolve: {
     alias: {
@@ -27,11 +27,22 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        loader: 'svg-url-loader'
+        loader: 'svg-url-loader',
+        options: {
+          encoding: 'base64',
+          limit: 10000,
+          name: 'static/media/[name].[hash:8].[ext]',
+          noquotes: true
+        }
       },
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: 'url-loader'
+        test: /\.(bmp|gif|jpe?g|png)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'static/media/[name].[hash:8].[ext]',
+          noquotes: true
+        }
       }
     ]
   },
@@ -40,7 +51,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, '../public/index.html'),
-      favicon: path.resolve(__dirname, '../public/assets/cbbc-icon-blue.ico')
+      favicon: path.resolve(__dirname, '../public/favicon.ico')
     })
   ]
 };

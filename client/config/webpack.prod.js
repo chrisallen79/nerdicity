@@ -15,16 +15,26 @@ module.exports = merge(common, {
       new OptimizeCssAssetsPlugin({})
     ],
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      maxSize: 240000
     }
   },
   module: {
     rules: [
       {
+        test: /\.(svg|bmp|gif|jpe?g|png)$/,
+        loader: 'image-webpack-loader',
+        enforce: 'pre'
+      },
+      {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       }
     ]
+  },
+  performance: {
+    maxAssetSize: 500000,
+    maxEntrypointSize: 500000
   },
   plugins: [
     new MiniCssExtractPlugin({

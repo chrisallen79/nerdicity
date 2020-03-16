@@ -14,4 +14,4 @@ services:
       - '3000:3000'
       - '3001:3001'
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production

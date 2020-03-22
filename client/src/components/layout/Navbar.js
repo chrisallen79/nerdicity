@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Menu, Segment } from 'semantic-ui-react';
+import cbbcLogo from '../../images/cbbc-logo-light.svg';
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class Navbar extends Component {
           <Grid.Column width={12}>
             <div className="logo">
               <Link to="/">
-                <img src="/assets/cbbc-logo-light.svg" />
+                <img src={cbbcLogo} />
               </Link>
             </div>
           </Grid.Column>

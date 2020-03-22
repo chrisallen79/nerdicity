@@ -1,27 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Grid, Image, Header, Segment } from 'semantic-ui-react';
+import cbbcLogo from '../../images/cbbc-logo-light.svg';
 
 const Main = () => {
   return (
-    <section className="bg-halftone">
-      <div className="home-inner">
-        <div className="home-image">
-          <img src="/assets/cbbc-logo-light.svg" />
-        </div>
-        <Container>
-          Join a group and discuss your favorite books, creators, shows, and more!!!
-        </Container>
-        <div style={{ paddingTop: '30px' }}>
-          <Button as={Link} to="/register" secondary>
-            Register
-          </Button>
-          <Button as={Link} to="/login" primary>
-            Login
-          </Button>
-        </div>
+    <div>
+      <div className="home-image">
+        <img src={cbbcLogo} />
       </div>
-    </section>
+      <Container>
+        Join a group and discuss your favorite books, creators, shows, and more!!!
+      </Container>
+      <div style={{ paddingTop: '30px' }}>
+        <Button as={Link} to="/register" secondary>
+          Register
+        </Button>
+        <Button as={Link} to="/login" primary>
+          Login
+        </Button>
+      </div>
+    </div>
   );
 };
 

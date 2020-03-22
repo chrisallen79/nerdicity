@@ -1,17 +1,24 @@
 version: '3.7'
 
 services:
-  cbbc_dev:
-    image: cbbc
-    container_name: cbbc-dev
+  cbbc:
+    image: cbbc-image
+    container_name: cbbc
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - '.:/app'
       - '/app/node_modules'
-    ports:
-      - '3000:3000'
-      - '3001:3001'
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
+  nginx:
+    image: nginx:1.17.9-alpine
+    container_name: nginx-cbbc
+    links:
+      - cbbc
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - '5000:80'
+      - '3001:3001'

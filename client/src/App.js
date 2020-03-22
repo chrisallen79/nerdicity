@@ -12,15 +12,17 @@ import './style/custom.css';
 const App = () => (
   <Router>
     <Fragment>
-      <Navbar />
-      <Route exact path="/" component={Main} />
-      <section className="container">
-        <Switch>
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-        </Switch>
+      <section className="bg-halftone">
+        <Navbar />
+        <div className="home-inner">
+          <Switch>
+            <Route exact path="/" component={Main} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+          </Switch>
+        </div>
+        <Footer />
       </section>
-      <Footer />
     </Fragment>
   </Router>
 );

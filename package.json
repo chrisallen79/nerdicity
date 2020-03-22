@@ -11,11 +11,13 @@
   "scripts": {
     "build": "webpack --config ./client/config/webpack.prod.js && webpack --config ./server/config/webpack.server.js",
     "client:prod": "serve -l 3000 -s ./dist/client",
-    "client:dev": "webpack-dev-server --host 0.0.0.0 --config ./client/config/webpack.dev.js",
     "server:prod": "node ./dist/server/index.js",
-    "server:dev": "nodemon --ignore ./client/ --exec babel-node -- ./server/src/server.js",
     "start:prod": "npm run build && npm run client:prod && npm run server:prod",
-    "start:dev": "concurrently -c \"bgBlue,bgMagenta\" -n \"CLIENT,SERVER\" -p \"[{name} {time}]\" -t \"HH:mm:ss.SSS\" \"npm run client:dev\" \"npm run server:dev\""
+    "client:dev": "webpack-dev-server --config ./client/config/webpack.dev.js",
+    "server:dev": "nodemon --ignore ./client/ --exec babel-node -- ./server/src/server.js",
+    "start:dev": "concurrently -c \"bgBlue,bgMagenta\" -n \"CLIENT,SERVER\" -p \"[{name} {time}]\" -t \"HH:mm:ss.SSS\" \"npm run client:dev\" \"npm run server:dev\"",
+    "start:docker": "docker-compose -f ./docker-compose.yml up --detach --build --force-recreate",
+    "stop:docker": "docker-compose -f ./docker-compose.yml down"
   },
   "eslintConfig": {
     "extends": "react-app"

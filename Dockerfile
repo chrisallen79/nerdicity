@@ -1,4 +1,4 @@
-FROM node:13.10.1-alpine
+FROM node:13.10.1
 
 # set app directory
 WORKDIR /app
@@ -8,7 +8,7 @@ COPY package.json ./
 COPY package-lock.json ./
 
 # install dependencies
-RUN npm install
+RUN npm install --no-optional
 
 # copy app source into container
 COPY . ./

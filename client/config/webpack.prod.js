@@ -22,11 +22,6 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.(svg|bmp|gif|jpe?g|png)$/,
-        loader: 'image-webpack-loader',
-        enforce: 'pre'
-      },
-      {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
       }

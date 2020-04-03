@@ -16,8 +16,10 @@
     "client:dev": "webpack-dev-server --config ./client/config/webpack.dev.js",
     "server:dev": "nodemon --ignore ./client/ --exec babel-node -- ./server/src/server.js",
     "start:dev": "concurrently -c \"bgBlue,bgMagenta\" -n \"CLIENT,SERVER\" -p \"[{name} {time}]\" -t \"HH:mm:ss.SSS\" \"npm run client:dev\" \"npm run server:dev\"",
-    "start:docker": "docker-compose -f ./docker-compose.yml up --detach --build --force-recreate",
-    "stop:docker": "docker-compose -f ./docker-compose.yml down"
+    "docker:compose:up:local": "docker-compose up -d --build --force-recreate",
+    "docker:compose:up:remote": "docker-compose -H ssh://ubuntu@54.167.123.102 up -d --build --force-recreate",
+    "docker:compose:down:local": "docker-compose down",
+    "docker:compose:down:remote": "docker-compose -H ssh://ubuntu@54.167.123.102 down"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -68,7 +70,6 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "file-loader": "^5.1.0",
     "html-webpack-plugin": "^3.2.0",
-    "image-webpack-loader": "^6.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "nodemon": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.3",

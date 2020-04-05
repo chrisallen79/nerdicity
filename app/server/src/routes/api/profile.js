@@ -10,13 +10,14 @@ const router = express.Router();
 // @access  Private
 router.get('/me', auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id }).populate('user', [
-      'name',
-      'avatar'
-    ]);
+    const profile = await Profile.findOne({
+      user: req.user.id
+    }).populate('user', ['name', 'avatar']);
 
     if (!profile) {
-      return res.status(400).json({ msg: `No profile for ${req.user.email}` });
+      return res
+        .status(400)
+        .json({ msg: `No profile for ${req.user.email}` });
     }
 
     return res.json(profile);
@@ -30,7 +31,14 @@ router.get('/me', auth, async (req, res) => {
 // @desc    Create or update profile for user
 // @access  Private
 router.post('/', auth, async (req, res) => {
-  const { location, bio, youtube, twitter, facebook, instagram } = req.body;
+  const {
+    location,
+    bio,
+    youtube,
+    twitter,
+    facebook,
+    instagram
+  } = req.body;
 
   // create profile
   const profileData = {
@@ -75,7 +83,10 @@ router.post('/', auth, async (req, res) => {
 // @access  Public
 router.get('/', async (req, res) => {
   try {
-    const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+    const profiles = await Profile.find().populate('user', [
+      'name',
+      'avatar'
+    ]);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
@@ -88,18 +99,22 @@ router.get('/', async (req, res) => {
 // @access  Public
 router.get('/user/:userId', async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.params.userId }).populate('user', [
-      'name',
-      'avatar'
-    ]);
+    const profile = await Profile.findOne({
+      user: req.params.userId
+    }).populate('user', ['name', 'avatar']);
 
-    if (!profile) return res.status(400).json({ msg: `User '${userId}' not found` });
+    if (!profile)
+      return res
+        .status(400)
+        .json({ msg: `User '${userId}' not found` });
 
     res.json(profile);
   } catch (err) {
     console.error(err.message);
     if (err.kind == 'ObjectId') {
-      return res.status(400).json({ msg: `User '${userId} not found` });
+      return res
+        .status(400)
+        .json({ msg: `User '${userId} not found` });
     }
     res.status(500).send('Internal Server Error');
   }

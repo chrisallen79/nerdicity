@@ -18,7 +18,10 @@ router.post(
       .not()
       .isEmpty(),
     check('email', 'Please enter a valid email address').isEmail(),
-    check('password', 'Password does not meet minimum requirements').isLength(8)
+    check(
+      'password',
+      'Password does not meet minimum requirements'
+    ).isLength(8)
   ],
   async (req, res) => {
     // return 400 for any validation errors
@@ -35,7 +38,11 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: `User with email ${email} already exists` }] });
+          .json({
+            errors: [
+              { msg: `User with email ${email} already exists` }
+            ]
+          });
       }
 
       // set up the avatar
@@ -68,10 +75,15 @@ router.post(
           id: user.id
         }
       };
-      jwt.sign(payload, CONFIG.jwt_secret, { expiresIn: CONFIG.jwt_expiration }, (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      });
+      jwt.sign(
+        payload,
+        CONFIG.jwt_secret,
+        { expiresIn: CONFIG.jwt_expiration },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Internal server error');

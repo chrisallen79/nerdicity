@@ -22,4 +22,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/profile', profileRoutes);
 
-app.listen(CONFIG.api_port, () => console.log(`Server started on port ${CONFIG.api_port}`));
+app.listen(CONFIG.api_port, () =>
+  console.log(`Server started on port ${CONFIG.api_port}`)
+);

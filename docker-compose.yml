@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   cbbc:
@@ -16,5 +16,5 @@ services:
     links:
       - cbbc
     ports:
-      - '80:80'
-      - '3001:3001'
+      - "80:80"
+      - "3001:3001"

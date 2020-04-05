@@ -27,7 +27,9 @@ router.post(
     }
 
     try {
-      const user = await User.findById(req.user.id).select('-password');
+      const user = await User.findById(req.user.id).select(
+        '-password'
+      );
 
       const newPost = new Post({
         text: req.body.text,
@@ -66,14 +68,18 @@ router.get('/:id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
-      return res.status(404).json({ msg: `Post with ID ${req.params.id} not found` });
+      return res
+        .status(404)
+        .json({ msg: `Post with ID ${req.params.id} not found` });
     }
 
     res.json(post);
   } catch (err) {
     console.error(err.message);
     if (err.kind == 'ObjectId') {
-      return res.status(404).json({ msg: `Post with ID ${req.params.id} not found` });
+      return res
+        .status(404)
+        .json({ msg: `Post with ID ${req.params.id} not found` });
     }
     res.status(500).send('Internal Server Error');
   }
@@ -87,7 +93,9 @@ router.delete('/:id', auth, async (req, res) => {
     const post = await Post.findById(req.params.id);
 
     if (!post) {
-      return res.status(404).json({ msg: `Post with ID ${req.params.id} not found` });
+      return res
+        .status(404)
+        .json({ msg: `Post with ID ${req.params.id} not found` });
     }
 
     // make sure user owns post before deleting
@@ -101,7 +109,9 @@ router.delete('/:id', auth, async (req, res) => {
   } catch (err) {
     console.error(err.message);
     if (err.kind == 'ObjectId') {
-      return res.status(404).json({ msg: `Post with ID ${req.params.id} not found` });
+      return res
+        .status(404)
+        .json({ msg: `Post with ID ${req.params.id} not found` });
     }
     res.status(500).send('Internal Server Error');
   }
@@ -114,7 +124,9 @@ router.put('/like/:id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    if (post.likes.filter(like => like.user == req.user.id).length > 0) {
+    if (
+      post.likes.filter(like => like.user == req.user.id).length > 0
+    ) {
       return res.status(400).json({ msg: `Post already liked` });
     }
 
@@ -135,11 +147,15 @@ router.put('/unlike/:id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    if (post.likes.filter(like => like.user == req.user.id).length === 0) {
+    if (
+      post.likes.filter(like => like.user == req.user.id).length === 0
+    ) {
       return res.status(400).json({ msg: `Post has not been liked` });
     }
 
-    const removeIndex = post.likes.map(like => like.user.toString()).indexOf(req.user.id);
+    const removeIndex = post.likes
+      .map(like => like.user.toString())
+      .indexOf(req.user.id);
     post.likes.splice(removeIndex, 1);
 
     await post.save();
@@ -171,7 +187,9 @@ router.post(
     }
 
     try {
-      const user = await User.findById(req.user.id).select('-password');
+      const user = await User.findById(req.user.id).select(
+        '-password'
+      );
       const post = await Post.findById(req.params.id);
 
       const newComment = {
@@ -200,19 +218,31 @@ router.delete('/comment/:id/:commentId', auth, async (req, res) => {
   try {
     // find the post and comment
     const post = await Post.findById(req.params.id);
-    const comment = post.comments.find(comment => comment.id == req.params.commentId);
+    const comment = post.comments.find(
+      comment => comment.id == req.params.commentId
+    );
 
     // make sure the comment exists
     if (!comment) {
-      return res.status(404).json({ msg: `Comment ${req.params.commentId} does not exist` });
+      return res
+        .status(404)
+        .json({
+          msg: `Comment ${req.params.commentId} does not exist`
+        });
     }
 
     // make sure the user can delete this comment
     if (comment.user != req.user.id) {
-      return res.status(401).json({ msg: `User is not authorized to delete this comment` });
+      return res
+        .status(401)
+        .json({
+          msg: `User is not authorized to delete this comment`
+        });
     }
 
-    const removeIndex = post.comments.map(comment => comment.user.toString()).indexOf(req.user.id);
+    const removeIndex = post.comments
+      .map(comment => comment.user.toString())
+      .indexOf(req.user.id);
     post.comments.splice(removeIndex, 1);
 
     await post.save();

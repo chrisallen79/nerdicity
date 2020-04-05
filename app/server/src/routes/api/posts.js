@@ -224,20 +224,16 @@ router.delete('/comment/:id/:commentId', auth, async (req, res) => {
 
     // make sure the comment exists
     if (!comment) {
-      return res
-        .status(404)
-        .json({
-          msg: `Comment ${req.params.commentId} does not exist`
-        });
+      return res.status(404).json({
+        msg: `Comment ${req.params.commentId} does not exist`
+      });
     }
 
     // make sure the user can delete this comment
     if (comment.user != req.user.id) {
-      return res
-        .status(401)
-        .json({
-          msg: `User is not authorized to delete this comment`
-        });
+      return res.status(401).json({
+        msg: `User is not authorized to delete this comment`
+      });
     }
 
     const removeIndex = post.comments

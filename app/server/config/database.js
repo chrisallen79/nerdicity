@@ -1,10 +1,11 @@
-import CONFIG from './config';
 import mongoose from 'mongoose';
+
+import CONFIG from './config';
 
 /**
  * Configure database
  */
-export const configureDatabase = async () => {
+const configureDatabase = async () => {
   // set MongoDB options
   const options = {
     useCreateIndex: true,
@@ -22,3 +23,5 @@ export const configureDatabase = async () => {
     process.exit(1);
   }
 };
+
+export default configureDatabase;

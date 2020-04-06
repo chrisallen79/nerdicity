@@ -3,6 +3,10 @@
   "parser": "babel-eslint",
   "plugins": ["prettier"],
   "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": true }
+    ],
     "no-console": "off",
     "prettier/prettier": ["error"]
   }

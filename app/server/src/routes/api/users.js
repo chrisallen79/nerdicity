@@ -3,8 +3,9 @@ import express from 'express';
 import { check, validationResult } from 'express-validator';
 import gravatar from 'gravatar';
 import jwt from 'jsonwebtoken';
+
 import CONFIG from '../../../config/config';
-import { User } from '../../models/User';
+import User from '../../models/User';
 
 const router = express.Router();
 
@@ -71,7 +72,7 @@ router.post(
           id: user.id
         }
       };
-      jwt.sign(
+      return jwt.sign(
         payload,
         CONFIG.jwt_secret,
         { expiresIn: CONFIG.jwt_expiration },
@@ -82,7 +83,7 @@ router.post(
       );
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Internal server error');
+      return res.status(500).send('Internal server error');
     }
   }
 );

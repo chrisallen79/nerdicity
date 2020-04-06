@@ -1,6 +1,7 @@
-import CONFIG from '../config/config';
-import { configureDatabase } from '../config/database';
 import express from 'express';
+
+import CONFIG from '../config/config';
+import configureDatabase from '../config/database';
 
 // import all routes
 import authRoutes from './routes/api/auth';
@@ -8,6 +9,7 @@ import postRoutes from './routes/api/posts';
 import profileRoutes from './routes/api/profile';
 import userRoutes from './routes/api/users';
 
+// eslint-disable-next-line new-cap
 const app = new express();
 
 // configure database

@@ -2,9 +2,10 @@ import bcrypt from 'bcryptjs';
 import express from 'express';
 import { check, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
-import { auth } from '../../middleware/auth';
+
+import auth from '../../middleware/auth';
 import CONFIG from '../../../config/config';
-import { User } from '../../models/User';
+import User from '../../models/User';
 
 const router = express.Router();
 
@@ -41,7 +42,7 @@ router.post(
 
     try {
       // verify that user doesn't already exist
-      let user = await User.findOne({ email });
+      const user = await User.findOne({ email });
       if (!user) {
         return res
           .status(400)
@@ -62,7 +63,7 @@ router.post(
           id: user.id
         }
       };
-      jwt.sign(
+      return jwt.sign(
         payload,
         CONFIG.jwt_secret,
         { expiresIn: CONFIG.jwt_expiration },
@@ -73,7 +74,7 @@ router.post(
       );
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Internal server error');
+      return res.status(500).send('Internal server error');
     }
   }
 );

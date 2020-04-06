@@ -1,7 +1,8 @@
 import express from 'express';
-import { auth } from '../../middleware/auth';
-import { Profile } from '../../models/Profile';
-import { User } from '../../models/User';
+
+import auth from '../../middleware/auth';
+import Profile from '../../models/Profile';
+import User from '../../models/User';
 
 const router = express.Router();
 
@@ -23,7 +24,7 @@ router.get('/me', auth, async (req, res) => {
     return res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
 });
 
@@ -43,13 +44,13 @@ router.post('/', auth, async (req, res) => {
   // create profile
   const profileData = {
     user: req.user.id,
-    location: location,
-    bio: bio,
+    location,
+    bio,
     social: {
-      youtube: youtube,
-      twitter: twitter,
-      facebook: facebook,
-      instagram: instagram
+      youtube,
+      twitter,
+      facebook,
+      instagram
     }
   };
 
@@ -71,10 +72,10 @@ router.post('/', auth, async (req, res) => {
     profile = new Profile(profileData);
     await profile.save();
 
-    res.json(profile);
+    return res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
 });
 
@@ -106,17 +107,17 @@ router.get('/user/:userId', async (req, res) => {
     if (!profile)
       return res
         .status(400)
-        .json({ msg: `User '${userId}' not found` });
+        .json({ msg: `User '${req.params.userId}' not found` });
 
-    res.json(profile);
+    return res.json(profile);
   } catch (err) {
     console.error(err.message);
-    if (err.kind == 'ObjectId') {
+    if (err.kind === 'ObjectId') {
       return res
         .status(400)
-        .json({ msg: `User '${userId} not found` });
+        .json({ msg: `User '${req.params.userId} not found` });
     }
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
 });
 
@@ -132,10 +133,10 @@ router.delete('/', auth, async (req, res) => {
     // remove user
     await User.findOneAndRemove({ _id: req.user.id });
 
-    res.json({ msg: `Deleted user '${req.user.id}'` });
+    return res.json({ msg: `Deleted user '${req.user.id}'` });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
 });
 

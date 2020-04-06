@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
+
 import CONFIG from '../../config/config';
 
-export const auth = (req, res, next) => {
+const auth = (req, res, next) => {
   // get token from header
   const token = req.header('x-auth-token');
 
@@ -12,8 +13,10 @@ export const auth = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, CONFIG.jwt_secret);
     req.user = decoded.user;
-    next();
+    return next();
   } catch (err) {
-    res.status(401).json({ msg: 'Invalid token' });
+    return res.status(401).json({ msg: 'Invalid token' });
   }
 };
+
+export default auth;

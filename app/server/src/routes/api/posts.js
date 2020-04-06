@@ -1,9 +1,9 @@
-import express, { request } from 'express';
+import express from 'express';
 import { check, validationResult } from 'express-validator';
-import { auth } from '../../middleware/auth';
-import { Post } from '../../models/Post';
-import { Profile } from '../../models/Profile';
-import { User } from '../../models/User';
+
+import auth from '../../middleware/auth';
+import Post from '../../models/Post';
+import User from '../../models/User';
 
 const router = express.Router();
 
@@ -40,10 +40,10 @@ router.post(
 
       const post = await newPost.save();
 
-      res.json(post);
+      return res.json(post);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Internal Server Error');
+      return res.status(500).send('Internal Server Error');
     }
   }
 );
@@ -73,15 +73,15 @@ router.get('/:id', auth, async (req, res) => {
         .json({ msg: `Post with ID ${req.params.id} not found` });
     }
 
-    res.json(post);
+    return res.json(post);
   } catch (err) {
     console.error(err.message);
-    if (err.kind == 'ObjectId') {
+    if (err.kind === 'ObjectId') {
       return res
         .status(404)
         .json({ msg: `Post with ID ${req.params.id} not found` });
     }
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
 });
 
@@ -99,21 +99,21 @@ router.delete('/:id', auth, async (req, res) => {
     }
 
     // make sure user owns post before deleting
-    if (post.user != req.user.id) {
+    if (post.user !== req.user.id) {
       return res.status(401).json({ msg: `User not authorized` });
     }
 
     await post.remove();
 
-    res.json({ msg: `Post deleted` });
+    return res.json({ msg: `Post deleted` });
   } catch (err) {
     console.error(err.message);
-    if (err.kind == 'ObjectId') {
+    if (err.kind === 'ObjectId') {
       return res
         .status(404)
         .json({ msg: `Post with ID ${req.params.id} not found` });
     }
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
 });
 
@@ -125,7 +125,7 @@ router.put('/like/:id', auth, async (req, res) => {
     const post = await Post.findById(req.params.id);
 
     if (
-      post.likes.filter(like => like.user == req.user.id).length > 0
+      post.likes.filter(like => like.user === req.user.id).length > 0
     ) {
       return res.status(400).json({ msg: `Post already liked` });
     }
@@ -133,10 +133,10 @@ router.put('/like/:id', auth, async (req, res) => {
     post.likes.unshift({ user: req.user.id });
     await post.save();
 
-    res.json(post.likes);
+    return res.json(post.likes);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
 });
 
@@ -148,7 +148,8 @@ router.put('/unlike/:id', auth, async (req, res) => {
     const post = await Post.findById(req.params.id);
 
     if (
-      post.likes.filter(like => like.user == req.user.id).length === 0
+      post.likes.filter(like => like.user === req.user.id).length ===
+      0
     ) {
       return res.status(400).json({ msg: `Post has not been liked` });
     }
@@ -160,10 +161,10 @@ router.put('/unlike/:id', auth, async (req, res) => {
 
     await post.save();
 
-    res.json(post.likes);
+    return res.json(post.likes);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
 });
 
@@ -203,10 +204,10 @@ router.post(
 
       await post.save();
 
-      res.json(post.comments);
+      return res.json(post.comments);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Internal Server Error');
+      return res.status(500).send('Internal Server Error');
     }
   }
 );
@@ -219,7 +220,7 @@ router.delete('/comment/:id/:commentId', auth, async (req, res) => {
     // find the post and comment
     const post = await Post.findById(req.params.id);
     const comment = post.comments.find(
-      comment => comment.id == req.params.commentId
+      postComment => postComment.id === req.params.commentId
     );
 
     // make sure the comment exists
@@ -230,23 +231,23 @@ router.delete('/comment/:id/:commentId', auth, async (req, res) => {
     }
 
     // make sure the user can delete this comment
-    if (comment.user != req.user.id) {
+    if (comment.user !== req.user.id) {
       return res.status(401).json({
         msg: `User is not authorized to delete this comment`
       });
     }
 
     const removeIndex = post.comments
-      .map(comment => comment.user.toString())
+      .map(postComment => postComment.user.toString())
       .indexOf(req.user.id);
     post.comments.splice(removeIndex, 1);
 
     await post.save();
 
-    res.json(post.comments);
+    return res.json(post.comments);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Internal Server Error');
+    return res.status(500).send('Internal Server Error');
   }
 });
 

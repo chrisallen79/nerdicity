@@ -1,20 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  Container,
-  Grid,
-  Image,
-  Header,
-  Segment
-} from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
+
 import cbbcLogo from '../../images/cbbc-logo-light.svg';
 
 const Main = () => {
   return (
     <div>
       <div className="home-image">
-        <img src={cbbcLogo} />
+        <img src={cbbcLogo} alt="The Comic Book Book Club" />
       </div>
       <Container>
         Join a group and discuss your favorite books, creators, shows,

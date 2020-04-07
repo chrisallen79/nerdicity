@@ -8,10 +8,14 @@
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": true,
 
+  "explorer.compactFolders": false,
+
   "diffEditor.ignoreTrimWhitespace": false,
 
   "files.encoding": "utf8",
   "files.eol": "\n",
+
+  "git.ignoreLimitWarning": true,
 
   "eslint.workingDirectories": [{ "mode": "auto" }]
 }

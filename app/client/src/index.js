@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from './App';
 
-const render = Component =>
+// set up render as a method so we an reuse it
+const render = Component => {
   ReactDOM.render(
     <AppContainer>
       <Component />
     </AppContainer>,
     document.getElementById('root')
   );
+};
 
 render(App);
 

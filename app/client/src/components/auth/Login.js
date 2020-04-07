@@ -49,7 +49,8 @@ const Login = () => {
         </Button>
       </Form>
       <p>
-        Don't have an account? <Link to="/register">Sign Up</Link>
+        Don&apos;t have an account?
+        <Link to="/register">Sign Up</Link>
       </p>
     </Fragment>
   );

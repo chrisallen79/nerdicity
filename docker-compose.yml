@@ -1,20 +1,22 @@
-version: "3.7"
+version: '3.7'
 
 services:
   cbbc:
     image: cbbc-image
     container_name: cbbc
+    restart: always
     build:
-      context: .
+      context: ./app
       dockerfile: Dockerfile
   nginx:
     image: nginx-image
     container_name: nginx
+    restart: always
     build:
-      context: .
-      dockerfile: Dockerfile.nginx
+      context: ./nginx
+      dockerfile: Dockerfile
     links:
       - cbbc
     ports:
-      - "80:80"
-      - "3001:3001"
+      - '80:80'
+      - '3001:3001'

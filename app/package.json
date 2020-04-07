@@ -16,10 +16,10 @@
     "client:dev": "webpack-dev-server --config ./client/config/webpack.dev.js",
     "server:dev": "nodemon --ignore ./client/ --exec babel-node -- ./server/src/server.js",
     "start:dev": "concurrently -c \"bgBlue,bgMagenta\" -n \"CLIENT,SERVER\" -p \"[{name} {time}]\" -t \"HH:mm:ss.SSS\" \"npm run client:dev\" \"npm run server:dev\"",
-    "docker:compose:up:local": "docker-compose up -d --build --force-recreate",
-    "docker:compose:up:remote": "docker-compose -H ssh://ubuntu@54.167.123.102 up -d --build --force-recreate",
-    "docker:compose:down:local": "docker-compose down",
-    "docker:compose:down:remote": "docker-compose -H ssh://ubuntu@54.167.123.102 down"
+    "docker:compose:up:local": "docker-compose -f ../docker-compose.yml up -d --build --force-recreate",
+    "docker:compose:up:remote": "docker-compose -f ../docker-compose.yml -H ssh://ubuntu@54.167.123.102 up -d --build --force-recreate",
+    "docker:compose:down:local": "docker-compose -f ../docker-compose.yml down",
+    "docker:compose:down:remote": "docker-compose -f ../docker-compose.yml -H ssh://ubuntu@54.167.123.102 down"
   },
   "eslintConfig": {
     "extends": "react-app"

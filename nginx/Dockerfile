@@ -3,7 +3,7 @@ FROM nginx:1.17.9-alpine
 WORKDIR /etc/nginx
 
 # copy config files
-COPY ./nginx ./
+COPY . ./
 
 # expose the http port
 EXPOSE 80

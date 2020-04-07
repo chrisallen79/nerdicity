@@ -1,7 +1,7 @@
-import path from 'path';
-import nodeExternals from 'webpack-node-externals';
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
-export default {
+module.exports = {
   mode: 'production',
   target: 'node',
   externals: [nodeExternals()],

@@ -4,15 +4,17 @@ services:
   cbbc:
     image: cbbc-image
     container_name: cbbc
+    restart: always
     build:
-      context: .
+      context: ./app
       dockerfile: Dockerfile
   nginx:
     image: nginx-image
     container_name: nginx
+    restart: always
     build:
-      context: .
-      dockerfile: Dockerfile.nginx
+      context: ./nginx
+      dockerfile: Dockerfile
     links:
       - cbbc
     ports:

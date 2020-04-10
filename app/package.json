@@ -46,7 +46,8 @@
     "redux-thunk": "^2.3.0",
     "request": "^2.88.0",
     "semantic-ui-react": "^0.88.2",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",

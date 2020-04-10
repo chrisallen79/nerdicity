@@ -5,6 +5,10 @@ import {
   Switch
 } from 'react-router-dom';
 
+// Redux
+import { Provider } from 'react-redux';
+import store from './store';
+
 import Navbar from './components/layout/Navbar';
 import Main from './components/layout/Main';
 import Register from './components/auth/Register';
@@ -14,21 +18,23 @@ import Footer from './components/layout/Footer';
 import './style/custom.css';
 
 const App = () => (
-  <Router>
-    <Fragment>
-      <section className="bg-halftone">
-        <Navbar />
-        <div className="home-inner">
-          <Switch>
-            <Route exact path="/" component={Main} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-          </Switch>
-        </div>
-        <Footer />
-      </section>
-    </Fragment>
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <Fragment>
+        <section className="bg-halftone">
+          <Navbar />
+          <div className="home-inner">
+            <Switch>
+              <Route exact path="/" component={Main} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+            </Switch>
+          </div>
+          <Footer />
+        </section>
+      </Fragment>
+    </Router>
+  </Provider>
 );
 
 export default App;

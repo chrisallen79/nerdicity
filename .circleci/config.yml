@@ -11,11 +11,11 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-        fingerprints:
-          - 'fc:1e:24:c1:d7:34:e3:91:c2:0b:82:c8:c0:c1:d1:bf'
+          fingerprints:
+            - 'fc:1e:24:c1:d7:34:e3:91:c2:0b:82:c8:c0:c1:d1:bf'
       - run:
-        name: Docker Compose on AWS
-        command: docker-compose -H ssh://ubuntu@54.167.123.102 up -d --build --force-recreate
+          name: Docker Compose on AWS
+          command: docker-compose -H ssh://ubuntu@54.167.123.102 up -d --build --force-recreate
 
 workflows:
   version: 2

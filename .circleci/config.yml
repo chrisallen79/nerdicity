@@ -9,10 +9,10 @@ jobs:
       - image: circleci/node:12.16.1
     working_directory: ~/repo
     steps:
-      - checkout
       - add_ssh_keys:
           fingerprints:
             - 'fc:1e:24:c1:d7:34:e3:91:c2:0b:82:c8:c0:c1:d1:bf'
+      - checkout
       - run:
           name: Docker Compose on AWS
           command: docker-compose -H ssh://ubuntu@ec2-54-167-123-102.compute-1.amazonaws.com up -d --build --force-recreate

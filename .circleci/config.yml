@@ -12,6 +12,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - 'fc:1e:24:c1:d7:34:e3:91:c2:0b:82:c8:c0:c1:d1:bf'
+      - setup_remote_docker
       - checkout
       - run:
           name: Docker Compose on AWS

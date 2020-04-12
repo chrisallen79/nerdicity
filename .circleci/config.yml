@@ -14,6 +14,9 @@ jobs:
           fingerprints:
             - 'fc:1e:24:c1:d7:34:e3:91:c2:0b:82:c8:c0:c1:d1:bf'
       - run:
+          name: Update known_known hosts file
+          command: ssh-keyscan -H ec2-54-167-123-102.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+      - run:
           name: Stop and remove docker containers
           command: docker-compose -H ssh://ubuntu@ec2-54-167-123-102.compute-1.amazonaws.com down --remove-orphans
       - run:
